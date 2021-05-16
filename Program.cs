@@ -22,20 +22,37 @@ namespace OpenApiCheck
 
             while (true)
             {
-                Thread.Sleep(5000);
+                Thread.Sleep(10000);
                 // List data response.
                 HttpResponseMessage response = client.GetAsync(URL).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
                 if (response.IsSuccessStatusCode)
                 {
                     string responseBody = response.Content.ReadAsStringAsync().Result;
                     var data = JsonConvert.DeserializeObject<Root>(responseBody);
-                    Console.WriteLine(data.centers[0].sessions[0].min_age_limit +" "+ data.centers[0].sessions[0].slots[0]);
+                    
+                    Console.WriteLine(data.centers[0].sessions[0].min_age_limit +"+ age || Available :"+ data.centers[0].sessions[0].available_capacity_dose1);
 
-                    //Console.Beep();
+                    if ((data.centers[0].sessions[0].available_capacity) != 0)
+                    {
+                        while (true)
+                        {
+                            Console.Beep();
+                            Thread.Sleep(500);
+                        }
+                    }
+                    if ((data.centers[0].sessions[0].available_capacity_dose1) != 0)
+                    {
+                        while (true)
+                        {
+                            Console.Beep();
+                            Thread.Sleep(500);
+                        }
+                    }
+                    Console.Beep();
                 }
                 else
                 {
-                    Console.WriteLine("Error XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+                    Console.WriteLine("Error XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX--------"+ response.StatusCode);
                 }
 
             }
