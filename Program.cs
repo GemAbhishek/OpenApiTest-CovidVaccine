@@ -48,7 +48,7 @@ namespace OpenApiCheck
                             Thread.Sleep(500);
                         }
                     }
-                    Console.Beep();
+                    //Console.Beep();
                 }
                 else
                 {
