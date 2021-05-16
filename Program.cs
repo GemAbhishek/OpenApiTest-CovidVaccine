@@ -52,7 +52,7 @@ namespace OpenApiCheck
                 }
                 else
                 {
-                    Console.WriteLine("Error XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX--------"+ response.StatusCode);
+                    Console.WriteLine("Error XXXXXXXXX---Wait this may be due to server issue--XXXXX");
                 }
 
             }
