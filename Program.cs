@@ -9,7 +9,7 @@ namespace OpenApiCheck
 {
     class Program
     {
-        private const string URL = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin?pincode=844121&date=17-05-2021";
+        private const string URL = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=844121&date=18-05-2021";
 
         public static void Main(string[] args)
         {
@@ -29,25 +29,32 @@ namespace OpenApiCheck
                 {
                     string responseBody = response.Content.ReadAsStringAsync().Result;
                     var data = JsonConvert.DeserializeObject<Root>(responseBody);
-                    
-                    Console.WriteLine(data.centers[0].sessions[0].min_age_limit +"+ age || Available :"+ data.centers[0].sessions[0].available_capacity_dose1);
+                    try
+                    {
+                        Console.WriteLine(data.centers[0].sessions[0].min_age_limit + "+ age || Available :" + data.centers[0].sessions[0].available_capacity_dose1);
 
-                    if ((data.centers[0].sessions[0].available_capacity) != 0)
-                    {
-                        while (true)
+                        if ((data.centers[0].sessions[0].available_capacity) != 0)
                         {
-                            Console.Beep();
-                            Thread.Sleep(500);
+                            while (true)
+                            {
+                                Console.Beep();
+                                Thread.Sleep(500);
+                            }
+                        }
+                        if ((data.centers[0].sessions[0].available_capacity_dose1) != 0)
+                        {
+                            while (true)
+                            {
+                                Console.Beep();
+                                Thread.Sleep(500);
+                            }
                         }
                     }
-                    if ((data.centers[0].sessions[0].available_capacity_dose1) != 0)
+                    catch
                     {
-                        while (true)
-                        {
-                            Console.Beep();
-                            Thread.Sleep(500);
-                        }
+                        Console.WriteLine("200 Response Empty");
                     }
+                    
                     //Console.Beep();
                 }
                 else
